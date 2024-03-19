@@ -17,8 +17,9 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
 from PySide6.QtWidgets import (QApplication, QLabel, QListWidget, QListWidgetItem,
-    QMainWindow, QMenu, QMenuBar, QPushButton,
-    QSizePolicy, QStatusBar, QTabWidget, QWidget)
+    QMainWindow, QMenu, QMenuBar, QProgressBar,
+    QPushButton, QSizePolicy, QStatusBar, QTabWidget,
+    QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -63,12 +64,17 @@ class Ui_MainWindow(object):
         self.btnRmDir.setObjectName(u"btnRmDir")
         self.btnRmDir.setEnabled(False)
         self.btnRmDir.setGeometry(QRect(160, 270, 100, 32))
-        self.pushButton_2 = QPushButton(self.tab_2)
-        self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setGeometry(QRect(340, 350, 100, 32))
+        self.btnNext2 = QPushButton(self.tab_2)
+        self.btnNext2.setObjectName(u"btnNext2")
+        self.btnNext2.setEnabled(False)
+        self.btnNext2.setGeometry(QRect(340, 350, 100, 32))
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_3 = QWidget()
         self.tab_3.setObjectName(u"tab_3")
+        self.progressBar = QProgressBar(self.tab_3)
+        self.progressBar.setObjectName(u"progressBar")
+        self.progressBar.setGeometry(QRect(30, 30, 371, 23))
+        self.progressBar.setValue(24)
         self.tabWidget.addTab(self.tab_3, "")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
@@ -85,7 +91,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -100,7 +106,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Face Selection", None))
         self.btnAddDir.setText(QCoreApplication.translate("MainWindow", u"Add Directory", None))
         self.btnRmDir.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Next", None))
+        self.btnNext2.setText(QCoreApplication.translate("MainWindow", u"Next", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Search Config", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("MainWindow", u"Results", None))
         self.menuPhoto_Nexus.setTitle(QCoreApplication.translate("MainWindow", u"Photo Nexus", None))
