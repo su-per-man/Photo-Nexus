@@ -11,15 +11,13 @@
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
-    QCursor, QFont, QFontDatabase, QGradient,
-    QIcon, QImage, QKeySequence, QLinearGradient,
-    QPainter, QPalette, QPixmap, QRadialGradient,
-    QTransform)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QLabel, QListWidget, QListWidgetItem,
-    QMainWindow, QMenu, QMenuBar, QProgressBar,
-    QPushButton, QSizePolicy, QStatusBar, QTabWidget,
-    QWidget)
+    QMainWindow, QMenuBar, QProgressBar, QPushButton,
+    QSizePolicy, QStatusBar, QTabWidget, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -57,9 +55,9 @@ class Ui_MainWindow(object):
         self.btnAddDir = QPushButton(self.tab_2)
         self.btnAddDir.setObjectName(u"btnAddDir")
         self.btnAddDir.setGeometry(QRect(50, 270, 100, 32))
-        self.listWidget = QListWidget(self.tab_2)
-        self.listWidget.setObjectName(u"listWidget")
-        self.listWidget.setGeometry(QRect(30, 60, 411, 192))
+        self.lstDir = QListWidget(self.tab_2)
+        self.lstDir.setObjectName(u"lstDir")
+        self.lstDir.setGeometry(QRect(30, 60, 411, 192))
         self.btnRmDir = QPushButton(self.tab_2)
         self.btnRmDir.setObjectName(u"btnRmDir")
         self.btnRmDir.setEnabled(False)
@@ -75,19 +73,18 @@ class Ui_MainWindow(object):
         self.progressBar.setObjectName(u"progressBar")
         self.progressBar.setGeometry(QRect(30, 30, 371, 23))
         self.progressBar.setValue(24)
+        self.lstResults = QListWidget(self.tab_3)
+        self.lstResults.setObjectName(u"lstResults")
+        self.lstResults.setGeometry(QRect(30, 80, 391, 251))
         self.tabWidget.addTab(self.tab_3, "")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 800, 22))
-        self.menuPhoto_Nexus = QMenu(self.menubar)
-        self.menuPhoto_Nexus.setObjectName(u"menuPhoto_Nexus")
+        self.menubar.setGeometry(QRect(0, 0, 800, 24))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
-        self.menubar.addAction(self.menuPhoto_Nexus.menuAction())
 
         self.retranslateUi(MainWindow)
 
@@ -109,6 +106,5 @@ class Ui_MainWindow(object):
         self.btnNext2.setText(QCoreApplication.translate("MainWindow", u"Next", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Search Config", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("MainWindow", u"Results", None))
-        self.menuPhoto_Nexus.setTitle(QCoreApplication.translate("MainWindow", u"Photo Nexus", None))
     # retranslateUi
 

@@ -114,7 +114,7 @@
        <string>Add Directory</string>
       </property>
      </widget>
-     <widget class="QListWidget" name="listWidget">
+     <widget class="QListWidget" name="lstDir">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -174,6 +174,16 @@
        <number>24</number>
       </property>
      </widget>
+     <widget class="QListWidget" name="lstResults">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>80</y>
+        <width>391</width>
+        <height>251</height>
+       </rect>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -183,15 +193,9 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuPhoto_Nexus">
-    <property name="title">
-     <string>Photo Nexus</string>
-    </property>
-   </widget>
-   <addaction name="menuPhoto_Nexus"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
