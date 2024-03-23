@@ -24,6 +24,7 @@ class MainWindow(QMainWindow):
         # Variables
         self.searchFacePath = "/"
         self.dirListItemSet = set()
+        self.resListItemSet = set()
 
         self.ui.tabWidget.setCurrentIndex(0)
         self.ui.tabWidget.setTabEnabled(1, False)
