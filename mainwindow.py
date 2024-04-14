@@ -2,10 +2,14 @@
 import sys
 import subprocess
 import platform
+import threading
+import queue
+
+# import time
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PySide6.QtGui import QPixmap
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QThread, Signal
 from deepface import DeepFace
 
 # Important:
@@ -26,7 +30,13 @@ class MainWindow(QMainWindow):
         self.dirListItemSet = set()
         self.resListItemSet = set()
 
+        # Variables: Thread safe operation
+        self.threads = []  # List to keep track of threads
+        self.lock = threading.Lock()
+        self.resQ = queue.Queue()
+
         self.ui.tabWidget.setCurrentIndex(0)
+        self.ui.btnNext1.setEnabled(False)
         self.ui.tabWidget.setTabEnabled(1, False)
         self.ui.tabWidget.setTabEnabled(2, False)
 
@@ -79,29 +89,36 @@ class MainWindow(QMainWindow):
         self.ui.progressBar.setMinimum(0)
         self.ui.progressBar.setMaximum(len(self.dirListItemSet))
         self.ui.progressBar.setValue(0)
-        progress = 0
-        self.resListItemSet.clear()
+        self.threads.clear()
 
         for dir in self.dirListItemSet:
-            res = DeepFace.find(
-                img_path=self.searchFacePath, db_path=dir, model_name="Facenet512"
-            )
-            progress += 1
-            self.ui.progressBar.setValue(progress)
-            for value in res[0]["identity"].values:
-                self.resListItemSet.add(value)
+            worker = SearchFaceThread(self.searchFacePath, dir)
+            worker.progress.connect(self.updateProgress)
+            worker.result.connect(self.on_threads_finished)
+            worker.finished.connect(worker.deleteLater)  # Ensure thread is cleaned up
+            worker.start()
+            self.threads.append(worker)  # Keep a reference to the thread
 
-        # TODO: Disable ds_facenet512_opencv_v2.pkl generation by adding db_path in the find param
+    def updateProgress(self, increment):
+        current_value = self.ui.progressBar.value()
+        self.ui.progressBar.setValue(current_value + increment)
 
-        self.ui.lstResults.clear()
-        self.ui.lstResults.addItems(sorted(self.resListItemSet))
+    def on_threads_finished(self, result):
+        for value in result[0]["identity"]:
+            self.resListItemSet.add(value)
+        if (
+            self.ui.progressBar.value() == len(self.dirListItemSet) - 1
+        ):  # Done with all threads
+            self.ui.lstResults.clear()
+            # TODO: Disable ds_facenet512_opencv_v2.pkl generation by adding db_path in the find param
+            self.ui.lstResults.addItems(sorted(self.resListItemSet, reverse=True))
 
     def nextPage(self):
         current = self.ui.tabWidget.currentIndex()
         self.ui.tabWidget.setTabEnabled(current + 1, True)
+        self.ui.tabWidget.setCurrentIndex(current + 1)
         if current == 1:
             self.initiateSearch()
-        self.ui.tabWidget.setCurrentIndex(current + 1)
 
     def photoSelection(self):
         file_name, _ = QFileDialog.getOpenFileName(
@@ -120,6 +137,28 @@ class MainWindow(QMainWindow):
                     aspectMode=Qt.AspectRatioMode.KeepAspectRatio,
                 )
             )
+            self.ui.btnNext1.setEnabled(True)
+
+
+class SearchFaceThread(QThread):
+    progress = Signal(int)
+    result = Signal(object)
+
+    def __init__(self, facePath, directory):
+        super().__init__()
+        self.facePath = facePath
+        self.directory = directory
+
+    def run(self):
+        # simulate delay for demonstration time.sleep(10)
+        try:
+            res = DeepFace.find(
+                img_path=self.facePath, db_path=self.directory, model_name="Facenet512"
+            )
+        except Exception as e:
+            res = {"error": str(e)}
+        self.result.emit(res)
+        self.progress.emit(1)
 
 
 if __name__ == "__main__":
