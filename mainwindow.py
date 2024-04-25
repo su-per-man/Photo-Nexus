@@ -1,4 +1,5 @@
 # This Python file uses the following encoding: utf-8
+import os
 import sys
 import subprocess
 import platform
@@ -92,12 +93,22 @@ class MainWindow(QMainWindow):
         self.threads.clear()
 
         for dir in self.dirListItemSet:
+            self.clearHistory(dir)
             worker = SearchFaceThread(self.searchFacePath, dir)
             worker.progress.connect(self.updateProgress)
             worker.result.connect(self.on_threads_finished)
             worker.finished.connect(worker.deleteLater)  # Ensure thread is cleaned up
             worker.start()
             self.threads.append(worker)  # Keep a reference to the thread
+
+
+    def clearHistory(self, dir):
+        files = os.listdir(dir)
+        files_to_delete = [f for f in files if "ds_facenet512_opencv" in f and f.endswith(".pkl") and os.path.isfile(os.path.join(dir, f))]
+        for f in files_to_delete:
+            file_path = os.path.join(dir, f)
+            os.remove(file_path)
+            print("removed " + file_path)
 
     def updateProgress(self, increment):
         current_value = self.ui.progressBar.value()
@@ -106,11 +117,11 @@ class MainWindow(QMainWindow):
     def on_threads_finished(self, result):
         for value in result[0]["identity"]:
             self.resListItemSet.add(value)
-        if (
-            self.ui.progressBar.value() == len(self.dirListItemSet) - 1
-        ):  # Done with all threads
+        if (self.ui.progressBar.value() == len(self.dirListItemSet) - 1):  # Done with all threads
+            for dir in self.dirListItemSet:
+                self.clearHistory(dir)
+
             self.ui.lstResults.clear()
-            # TODO: Disable ds_facenet512_opencv_v2.pkl generation by adding db_path in the find param
             self.ui.lstResults.addItems(sorted(self.resListItemSet, reverse=True))
 
     def nextPage(self):
@@ -118,6 +129,7 @@ class MainWindow(QMainWindow):
         self.ui.tabWidget.setTabEnabled(current + 1, True)
         self.ui.tabWidget.setCurrentIndex(current + 1)
         if current == 1:
+            self.ui.lstResults.clear()
             self.initiateSearch()
 
     def photoSelection(self):
@@ -153,7 +165,7 @@ class SearchFaceThread(QThread):
         # simulate delay for demonstration time.sleep(10)
         try:
             res = DeepFace.find(
-                img_path=self.facePath, db_path=self.directory, model_name="Facenet512"
+                img_path=self.facePath, db_path=self.directory, model_name="Facenet512", enforce_detection=False
             )
         except Exception as e:
             res = {"error": str(e)}
