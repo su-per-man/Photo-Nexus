@@ -177,6 +177,7 @@ class SearchFaceThread(QThread):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    app.setStyle("macOS")
     widget = MainWindow()
     widget.show()
     sys.exit(app.exec())
