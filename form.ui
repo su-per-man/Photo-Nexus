@@ -10,55 +10,99 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Photo Nexus</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="maximumSize">
+    <size>
+     <width>800</width>
+     <height>600</height>
+    </size>
+   </property>
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>40</y>
-      <width>471</width>
-      <height>431</height>
+      <x>100</x>
+      <y>50</y>
+      <width>600</width>
+      <height>450</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgba(0, 0, 0, 103);</string>
+    </property>
+    <property name="tabShape">
+     <enum>QTabWidget::Triangular</enum>
     </property>
     <property name="currentIndex">
      <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
      <attribute name="title">
       <string>Face Selection</string>
      </attribute>
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>170</x>
-        <y>40</y>
-        <width>121</width>
-        <height>51</height>
+        <x>190</x>
+        <y>0</y>
+        <width>201</width>
+        <height>131</height>
        </rect>
       </property>
       <property name="font">
        <font>
+        <family>Quicksand</family>
         <pointsize>22</pointsize>
+        <bold>true</bold>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(0, 0, 255, 69), stop:0.375 rgba(0, 0, 255, 69), stop:0.423533 rgba(0, 4, 255, 145), stop:0.45 rgba(0, 8, 255, 208), stop:0.477581 rgba(11, 0, 184, 130), stop:0.518717 rgba(37, 0, 184, 130), stop:0.55 rgba(0, 0, 255, 255), stop:0.57754 rgba(52, 0, 130, 130), stop:0.625 rgba(0, 0, 255, 69), stop:1 rgba(0, 0, 255, 69));</string>
       </property>
       <property name="text">
        <string>Get Started!</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
      <widget class="QPushButton" name="btnBrowseFace">
       <property name="geometry">
        <rect>
-        <x>180</x>
-        <y>280</y>
+        <x>240</x>
+        <y>320</y>
         <width>100</width>
         <height>32</height>
        </rect>
       </property>
       <property name="cursor">
        <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
        <string>Browse</string>
@@ -73,42 +117,86 @@
      <widget class="QLabel" name="lblImage">
       <property name="geometry">
        <rect>
-        <x>140</x>
+        <x>180</x>
         <y>100</y>
-        <width>191</width>
-        <height>151</height>
+        <width>221</width>
+        <height>181</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(0, 0, 0, 100);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
       </property>
       <property name="text">
        <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
      <widget class="QPushButton" name="btnNext1">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>350</y>
+        <x>470</x>
+        <y>370</y>
         <width>100</width>
         <height>32</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
+background-color: rgba(4, 51, 255, 75);</string>
       </property>
       <property name="text">
        <string>Next &gt;</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>290</y>
+        <width>221</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Select a photo of an individual</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
      <attribute name="title">
       <string>Search Config</string>
      </attribute>
      <widget class="QPushButton" name="btnAddDir">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>270</y>
+        <x>90</x>
+        <y>310</y>
         <width>100</width>
         <height>32</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
        <string>Add Directory</string>
@@ -117,11 +205,24 @@
      <widget class="QListWidget" name="lstDir">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>60</y>
+        <x>90</x>
+        <y>90</y>
         <width>411</width>
         <height>192</height>
        </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(0, 0, 0, 100);
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
       </property>
      </widget>
      <widget class="QPushButton" name="btnRmDir">
@@ -130,14 +231,17 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>160</x>
-        <y>270</y>
-        <width>100</width>
+        <x>200</x>
+        <y>310</y>
+        <width>121</width>
         <height>32</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
       <property name="text">
-       <string>Remove</string>
+       <string>Exclude Directory</string>
       </property>
      </widget>
      <widget class="QPushButton" name="btnNext2">
@@ -146,26 +250,46 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>340</x>
-        <y>350</y>
+        <x>470</x>
+        <y>370</y>
         <width>100</width>
         <height>32</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
+background-color: rgba(4, 51, 255, 75);</string>
       </property>
       <property name="text">
        <string>Next</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>50</y>
+        <width>261</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Where do you want to search the person?</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_3">
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
      <attribute name="title">
       <string>Results</string>
      </attribute>
      <widget class="QProgressBar" name="progressBar">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>30</y>
+        <x>100</x>
+        <y>40</y>
         <width>371</width>
         <height>23</height>
        </rect>
@@ -177,15 +301,55 @@
      <widget class="QListWidget" name="lstResults">
       <property name="geometry">
        <rect>
-        <x>30</x>
+        <x>90</x>
         <y>80</y>
         <width>391</width>
-        <height>251</height>
+        <height>250</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(0, 0, 0, 100);
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
       </property>
      </widget>
     </widget>
    </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>800</width>
+      <height>600</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>800</width>
+      <height>600</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>800</width>
+      <height>600</height>
+     </size>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="resources.qrc">:/resources/background.jpg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <zorder>label_2</zorder>
+   <zorder>tabWidget</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -197,8 +361,20 @@
     </rect>
    </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="toolTip">
+    <string/>
+   </property>
+   <property name="statusTip">
+    <string/>
+   </property>
+   <property name="whatsThis">
+    <string/>
+   </property>
+  </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
