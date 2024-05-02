@@ -62,10 +62,11 @@ class MainWindow(QMainWindow):
 
     def addDir(self):
         folderPath = QFileDialog.getExistingDirectory(self)
-        self.dirListItemSet.add(folderPath)
-        self.ui.lstDir.clear()
-        self.ui.lstDir.addItems(self.dirListItemSet)
-        self.updateNextButtonState()
+        if folderPath:
+            self.dirListItemSet.add(folderPath)
+            self.ui.lstDir.clear()
+            self.ui.lstDir.addItems(self.dirListItemSet)
+            self.updateNextButtonState()
 
     def removeDir(self):
         selectedItems = self.ui.lstDir.selectedItems()
@@ -124,7 +125,7 @@ class MainWindow(QMainWindow):
 
             self.ui.lstResults.clear()
             self.ui.lstResults.addItems(sorted(self.resListItemSet, reverse=True))
-            self.ui.statusbar.showMessage("")
+            self.ui.statusbar.showMessage("Completed!")
 
     def nextPage(self):
         current = self.ui.tabWidget.currentIndex()
