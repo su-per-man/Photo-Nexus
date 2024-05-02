@@ -2,7 +2,7 @@
 import os
 import sys
 import subprocess
-import platform
+#import platform
 import threading
 import queue
 
@@ -55,10 +55,10 @@ class MainWindow(QMainWindow):
         self.ui.lstResults.itemClicked.connect(self.openContainingFolder)
 
     def openContainingFolder(self, path):
-        if platform.system() == "Windows":  # Windows
-            subprocess.run(["explorer", "/select,", path.text()])
-        elif platform.system() == "Darwin":  # macOS
-            subprocess.run(["open", "-R", path.text()])
+        # if platform.system() == "Windows":  # Windows
+        #     subprocess.run(["explorer", "/select,", path.text()])
+        # elif platform.system() == "Darwin":  # macOS
+        subprocess.run(["open", "-R", path.text()])
 
     def addDir(self):
         folderPath = QFileDialog.getExistingDirectory(self)
@@ -90,6 +90,7 @@ class MainWindow(QMainWindow):
         self.ui.progressBar.setMinimum(0)
         self.ui.progressBar.setMaximum(len(self.dirListItemSet))
         self.ui.progressBar.setValue(0)
+        self.ui.statusbar.showMessage("Searching.. Hang tight! I'm on a photo hunt...")
         self.threads.clear()
 
         for dir in self.dirListItemSet:
@@ -123,6 +124,7 @@ class MainWindow(QMainWindow):
 
             self.ui.lstResults.clear()
             self.ui.lstResults.addItems(sorted(self.resListItemSet, reverse=True))
+            self.ui.statusbar.showMessage("")
 
     def nextPage(self):
         current = self.ui.tabWidget.currentIndex()
